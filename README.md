@@ -1,6 +1,13 @@
-# LayerCake 🍰
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/logo-dark.png">
+    <img src="assets/logo.png" alt="LayerCake logo: a slice of cake with a TL;DR layer on top of a Full Response layer" width="260">
+  </picture>
+</p>
 
-**A summary on top, the full response underneath.**
+<h1 align="center">LayerCake</h1>
+
+<p align="center"><b>A summary on top, the full response underneath.</b></p>
 
 Get answers in **layers** from Claude and ChatGPT: a quick summary first, then the full response. You can stop reading after any layer.
 
@@ -354,6 +361,7 @@ plugins/layercake/
 chatgpt/                               Custom GPT and Custom Instructions setup
 prompt/layercake.md                    general prompt for other tools
 package-skill.sh                       builds dist/layercake-skill.zip
+assets/                                logo (light and dark versions)
 ```
 
 The rules exist in four copies: `SKILL.md`, `prompt/layercake.md`, `chatgpt/custom-instructions.txt`, and the hook text in `layers.sh`. If you change them, change all four.
