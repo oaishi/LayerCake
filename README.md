@@ -9,6 +9,14 @@
 
 <p align="center"><b>A summary on top, the full response underneath.</b></p>
 
+<p align="center">
+  <a href="assets/layercake-demo.mp4">
+    <img src="assets/demo-preview.gif" alt="LayerCake demo: a normal Claude answer as one long block, then the same question answered as Summary and Response layers, then custom layers" width="800">
+  </a>
+  <br>
+  <sub>▶ <a href="assets/layercake-demo.mp4">Watch the full 1-minute demo (MP4, 1080p)</a></sub>
+</p>
+
 Get answers in **layers** from Claude and ChatGPT: a quick summary first, then the full response. You can stop reading after any layer.
 
 ```markdown
