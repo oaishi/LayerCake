@@ -1,0 +1,14 @@
+{
+  "name": "layered-response",
+  "owner": {
+    "name": "YOUR_GITHUB_USERNAME"
+  },
+  "plugins": [
+    {
+      "name": "layered-response",
+      "source": "./plugins/layered-response",
+      "description": "Layered answers: a quick Summary, then the full Response, or any layers you define. Toggle with /layers.",
+      "version": "0.1.0"
+    }
+  ]
+}
