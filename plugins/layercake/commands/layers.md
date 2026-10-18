@@ -10,4 +10,4 @@ $ARGUMENTS
 LAYERS_ARGS
 ```
 
-The output above comes from the layered-response plugin. Confirm the result to the user in one short line, for example "Layered responses are ON: Summary → Response". If the output is a usage message, show it as is. Don't run any other tools, and don't format this reply in layers.
+The output above comes from the layercake plugin. Confirm the result to the user in one short line, for example "LayerCake is ON: Summary → Response". If the output is a usage message, show it as is. Don't run any other tools, and don't format this reply in layers.

@@ -1,10 +1,13 @@
 {
-  "name": "layered-response",
+  "name": "layercake",
   "version": "0.1.0",
   "description": "Layered answers: a quick Summary, then the full Response, or any layers you define. Toggle with /layers.",
   "author": {
-    "name": "Layered Response contributors"
+    "name": "Faria Huq",
+    "url": "https://github.com/oaishi"
   },
+  "homepage": "https://github.com/oaishi/LayerCake",
+  "repository": "https://github.com/oaishi/LayerCake",
   "license": "MIT",
   "keywords": ["summary", "tldr", "layers", "formatting", "responses"]
 }

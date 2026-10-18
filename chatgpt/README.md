@@ -1,4 +1,4 @@
-# Layered Response for ChatGPT
+# LayerCake for ChatGPT
 
 ChatGPT has no plugin system for changing how it formats replies, so there are two ways to set this up.
 
@@ -8,9 +8,9 @@ Layering is on in every chat you start with this GPT, and the rest of ChatGPT is
 
 1. Go to **Explore GPTs → Create → Configure**.
 2. Fill in:
-   - **Name:** Layered Response
+   - **Name:** LayerCake
    - **Description:** Answers in layers: a quick summary, then the full response. Set your own layers with "layers: A | B | C".
-   - **Instructions:** paste everything in [`../prompt/layered-response.md`](../prompt/layered-response.md).
+   - **Instructions:** paste everything in [`../prompt/layercake.md`](../prompt/layercake.md).
    - **Conversation starters:**
      - `Why is the sky blue?`
      - `layers: TL;DR | Explain like I'm 5 | Expert detail`

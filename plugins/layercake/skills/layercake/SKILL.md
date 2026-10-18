@@ -1,9 +1,9 @@
 ---
-name: layered-response
+name: layercake
 description: Answers in stacked layers, by default a short Summary followed by the full Response, and lets the user turn layering on or off or define their own layers (e.g. "TL;DR | Explanation | Code"). Use when the user says "layers on", "layered mode", "answer in layers", "summary first", sets custom layers with "layers: ...", or says "layers off".
 ---
 
-# Layered Response
+# LayerCake
 
 Answer in **layers**: each one is a complete take on the answer, and each goes deeper than the one before it. A reader can stop after any layer and still have what they need.
 

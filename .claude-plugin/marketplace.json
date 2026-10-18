@@ -1,12 +1,12 @@
 {
-  "name": "layered-response",
+  "name": "layercake",
   "owner": {
-    "name": "YOUR_GITHUB_USERNAME"
+    "name": "oaishi"
   },
   "plugins": [
     {
-      "name": "layered-response",
-      "source": "./plugins/layered-response",
+      "name": "layercake",
+      "source": "./plugins/layercake",
       "description": "Layered answers: a quick Summary, then the full Response, or any layers you define. Toggle with /layers.",
       "version": "0.1.0"
     }

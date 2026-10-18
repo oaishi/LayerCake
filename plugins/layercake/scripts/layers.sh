@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# layered-response: keeps the on/off state and the layer list, and prints the
+# layercake: keeps the on/off state and the layer list, and prints the
 # instructions that the UserPromptSubmit hook injects into each prompt.
 #
 # Usage:
@@ -15,7 +15,7 @@
 
 set -u
 
-STATE_DIR="${LAYERED_RESPONSE_HOME:-$HOME/.claude/layered-response}"
+STATE_DIR="${LAYERCAKE_HOME:-$HOME/.claude/layercake}"
 STATE_FILE="$STATE_DIR/state"
 DEFAULT_LAYERS="Summary: 1-3 sentences that give the gist of the answer | Response: your full answer, as you would normally write it"
 
@@ -75,19 +75,19 @@ layer_names() {
 status() {
   local state
   state=$(printf '%s' "$enabled" | tr '[:lower:]' '[:upper:]')
-  echo "Layered responses: $state"
+  echo "LayerCake: $state"
   echo "Layers: $(layer_names)"
   layer_list "  "
 }
 
 hook() {
   # Don't layer the reply to /layers itself.
-  if grep -Eq '"prompt"[[:space:]]*:[[:space:]]*"/(layered-response:)?layers'; then
+  if grep -Eq '"prompt"[[:space:]]*:[[:space:]]*"/(layercake:)?layers'; then
     return 0
   fi
   [ "$enabled" = "on" ] || return 0
   cat <<EOF
-<layered-response>
+<layercake>
 Layered responses are ON. Structure your final reply to the user as the layers below, in this order. Start each layer with a level-2 Markdown heading of its name (for example "## $(parse_layers "$layers" | head -n 1 | cut -f 1)") and put nothing before the first layer.
 
 $(layer_list "")
@@ -98,7 +98,7 @@ Rules:
 - Match length to the question. A short question gets short layers.
 - If a layer doesn't fit this reply, keep its heading and say so in one line.
 - Apply this only to your final reply for the turn, not to tool calls or progress updates.
-</layered-response>
+</layercake>
 EOF
 }
 

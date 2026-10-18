@@ -1,4 +1,6 @@
-# Layered Response
+# LayerCake 🍰
+
+**A summary on top, the full response underneath.**
 
 Get answers in **layers** from Claude and ChatGPT: a quick summary first, then the full response. You can stop reading after any layer.
 
@@ -57,11 +59,11 @@ The same rules are packaged in a different form for each tool:
 
 | Tool | Form | How layering stays on |
 |---|---|---|
-| Claude.ai / Desktop | [Skill](plugins/layered-response/skills/layered-response/SKILL.md) | For the rest of the chat once you turn it on |
-| Claude.ai Projects | [Prompt](prompt/layered-response.md) in project instructions | Always on in that project |
-| Claude Code | [Plugin](plugins/layered-response/) (hook, command and skill) | Saved setting that lasts between sessions |
+| Claude.ai / Desktop | [Skill](plugins/layercake/skills/layercake/SKILL.md) | For the rest of the chat once you turn it on |
+| Claude.ai Projects | [Prompt](prompt/layercake.md) in project instructions | Always on in that project |
+| Claude Code | [Plugin](plugins/layercake/) (hook, command and skill) | Saved setting that lasts between sessions |
 | ChatGPT | [Custom GPT or Custom Instructions](chatgpt/README.md) | Always on in that GPT, or in every chat |
-| Anything else | [Prompt](prompt/layered-response.md) | Wherever you paste it |
+| Anything else | [Prompt](prompt/layercake.md) | Wherever you paste it |
 
 ---
 
@@ -71,10 +73,10 @@ The same rules are packaged in a different form for each tool:
 
 Skills need **code execution** turned on: go to **Settings → Capabilities → Code execution and file creation**.
 
-1. **Get the zip.** Either download `layered-response-skill.zip` from the GitHub release, or build it from the repo:
+1. **Get the zip.** Either download `layercake-skill.zip` from the GitHub release, or build it from the repo:
    ```sh
    ./package-skill.sh
-   # → dist/layered-response-skill.zip
+   # → dist/layercake-skill.zip
    ```
 2. **Upload it.** Go to **Settings → Capabilities → Skills → Upload skill**, choose the zip, and make sure the skill's toggle is on.
 3. **Use it.** In any chat, type `layers on`, then ask a question.
@@ -86,7 +88,7 @@ The skill loads when your message matches it, for example "layers on", "answer i
 Use this if you can't upload skills, or if you want layering always on in some chats:
 
 1. Create a **Project** in Claude.ai.
-2. Open **Project instructions** and paste in everything from [`prompt/layered-response.md`](prompt/layered-response.md).
+2. Open **Project instructions** and paste in everything from [`prompt/layercake.md`](prompt/layercake.md).
 3. Every chat in that project starts with layering on. `layers off` and the other commands still work.
 
 ### Claude Code (plugin)
@@ -94,30 +96,30 @@ Use this if you can't upload skills, or if you want layering always on in some c
 From GitHub:
 
 ```
-/plugin marketplace add YOUR_GITHUB_USERNAME/layered-response
-/plugin install layered-response@layered-response
+/plugin marketplace add oaishi/LayerCake
+/plugin install layercake@layercake
 ```
 
 From a local copy (handy while you're developing):
 
 ```sh
-claude --plugin-dir ./plugins/layered-response
+claude --plugin-dir ./plugins/layercake
 ```
 
-Layering is **off** after install, and `/layers` turns it on. The setting is stored in `~/.claude/layered-response/state` and applies to every project.
+Layering is **off** after install, and `/layers` turns it on. The setting is stored in `~/.claude/layercake/state` and applies to every project.
 
-Behind the scenes, a `UserPromptSubmit` hook runs [`layers.sh`](plugins/layered-response/scripts/layers.sh) on every prompt. When layering is on, the script adds the layer instructions to the prompt. The `/layers` command changes the saved setting. The plugin also includes the skill, so you can ask for a single layered answer without turning the mode on.
+Behind the scenes, a `UserPromptSubmit` hook runs [`layers.sh`](plugins/layercake/scripts/layers.sh) on every prompt. When layering is on, the script adds the layer instructions to the prompt. The `/layers` command changes the saved setting. The plugin also includes the skill, so you can ask for a single layered answer without turning the mode on.
 
 ### ChatGPT
 
 See [chatgpt/README.md](chatgpt/README.md). There are two options:
 
-- **Custom GPT** (recommended): paste [`prompt/layered-response.md`](prompt/layered-response.md) in as the GPT's instructions.
+- **Custom GPT** (recommended): paste [`prompt/layercake.md`](prompt/layercake.md) in as the GPT's instructions.
 - **Custom Instructions**: paste [`chatgpt/custom-instructions.txt`](chatgpt/custom-instructions.txt), which fits ChatGPT's 1,500-character limit, to turn layering on in every chat.
 
 ### Other tools
 
-[`prompt/layered-response.md`](prompt/layered-response.md) is a general prompt. You can paste it into Gemini Gems, an API system prompt, Cursor rules, Open WebUI, or anywhere else that accepts a system prompt.
+[`prompt/layercake.md`](prompt/layercake.md) is a general prompt. You can paste it into Gemini Gems, an API system prompt, Cursor rules, Open WebUI, or anywhere else that accepts a system prompt.
 
 ---
 
@@ -283,13 +285,13 @@ Answer this in layers: should I learn Rust or Go first?
 ## Walkthrough: test it in Claude Code
 
 ```sh
-claude --plugin-dir ./plugins/layered-response
+claude --plugin-dir ./plugins/layercake
 ```
 
 | Step | Type | Expect |
 |---|---|---|
-| 1 | `/layers status` | `Layered responses: OFF` and `Layers: Summary → Response` |
-| 2 | `/layers` | `Layered responses: ON` |
+| 1 | `/layers status` | `LayerCake: OFF` and `Layers: Summary → Response` |
+| 2 | `/layers` | `LayerCake: ON` |
 | 3 | `explain what a git rebase is` | A reply with `## Summary`, then `## Response` |
 | 4 | `/layers TL;DR \| Steps \| Pitfalls` | `ON` and `Layers: TL;DR → Steps → Pitfalls` |
 | 5 | `how do I undo my last commit?` | Three layers in that order |
@@ -300,8 +302,8 @@ claude --plugin-dir ./plugins/layered-response
 You can test the script directly without touching your real setting:
 
 ```sh
-export LAYERED_RESPONSE_HOME=/tmp/layers-test
-S=plugins/layered-response/scripts/layers.sh
+export LAYERCAKE_HOME=/tmp/layers-test
+S=plugins/layercake/scripts/layers.sh
 $S on                                    # turn on
 $S "TL;DR: one line | Details"           # set layers (quote it: ; and | are shell syntax)
 echo '{"prompt":"hi"}' | $S hook         # prints the instructions Claude receives
@@ -327,11 +329,11 @@ $S off; echo '{"prompt":"hi"}' | $S hook # prints nothing
 
 ## Troubleshooting
 
-**Claude.ai: "layers on" does nothing.** Check that the skill is uploaded and toggled on, and that code execution is enabled. Try `Use the layered-response skill. layers on`. If skills aren't available on your plan, use the [Project](#claudeai-projects-no-upload-needed) setup instead.
+**Claude.ai: "layers on" does nothing.** Check that the skill is uploaded and toggled on, and that code execution is enabled. Try `Use the layercake skill. layers on`. If skills aren't available on your plan, use the [Project](#claudeai-projects-no-upload-needed) setup instead.
 
-**Claude Code: `/layers` isn't found.** Run `/plugin` and check that `layered-response` is installed and enabled. If another plugin also has a `/layers` command, use `/layered-response:layers`.
+**Claude Code: `/layers` isn't found.** Run `/plugin` and check that `layercake` is installed and enabled. If another plugin also has a `/layers` command, use `/layercake:layers`.
 
-**Claude Code: `/layers` asks for permission or fails.** The command runs `scripts/layers.sh` directly. Approve it, or make sure the script is executable: `chmod +x plugins/layered-response/scripts/layers.sh`.
+**Claude Code: `/layers` asks for permission or fails.** The command runs `scripts/layers.sh` directly. Approve it, or make sure the script is executable: `chmod +x plugins/layercake/scripts/layers.sh`.
 
 **Claude Code: Windows.** The hook is a bash script. It runs under Git Bash or WSL, which Claude Code on Windows already uses.
 
@@ -343,18 +345,18 @@ $S off; echo '{"prompt":"hi"}' | $S hook # prints nothing
 
 ```
 .claude-plugin/marketplace.json        Claude Code marketplace entry
-plugins/layered-response/
+plugins/layercake/
   .claude-plugin/plugin.json           plugin manifest
   commands/layers.md                   /layers command
   hooks/hooks.json                     injects layer instructions on each prompt
   scripts/layers.sh                    state and prompt builder (bash)
-  skills/layered-response/SKILL.md     skill for Claude Code and Claude.ai
+  skills/layercake/SKILL.md            skill for Claude Code and Claude.ai
 chatgpt/                               Custom GPT and Custom Instructions setup
-prompt/layered-response.md             general prompt for other tools
-package-skill.sh                       builds dist/layered-response-skill.zip
+prompt/layercake.md                    general prompt for other tools
+package-skill.sh                       builds dist/layercake-skill.zip
 ```
 
-The rules exist in four copies: `SKILL.md`, `prompt/layered-response.md`, `chatgpt/custom-instructions.txt`, and the hook text in `layers.sh`. If you change them, change all four.
+The rules exist in four copies: `SKILL.md`, `prompt/layercake.md`, `chatgpt/custom-instructions.txt`, and the hook text in `layers.sh`. If you change them, change all four.
 
 ## Contributing
 
